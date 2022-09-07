@@ -1,5 +1,5 @@
-<div class="app">
-  <section class="position" [@pageNumber] = "pageNumber">
+<div class="app" [class.move] = 'animate'>
+  <section class="position">
   <div class="card">
     <h1>Study</h1>
     <div class="counter">
@@ -7,33 +7,18 @@
     </div>
 
     <div class="buttons">
-      <button><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
-      <button><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
-      <button><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
-      <button (click)="toggle('three')"
+      <button (click)="start()"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
+      <button (click)="stop()"><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
+      <button (click)="reset()"><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
+      <button (click)="toggleDisplay()"
       ><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
       </button>
     </div>
   </div>
 
-  <div class="card break">
-    <h1>Break</h1>
 
-    <div class="counter">
-        <div class="number">{{breakDuration}}</div>
-    </div>
-
-    <div class="buttons">
-      <button><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
-      <button><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
-      <button><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
-      <button (click)="toggle('three')"
-      ><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
-      </button>
-    </div>
-  </div>
-
-  <div class="settings-card">
+  <div class="settings-card" [hidden]="isDisplay">
+    <h1>Settings</h1>  <button (click)="toggleDisplay()"><mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon></button>
     <div class="counter">
       <h1>Work Duration</h1>
       <button (click)="increase_focusTime()">+</button>
@@ -50,4 +35,8 @@
 </div>
   </div>
 </section>
+
+<audio #idAudio controls class="done">
+  <source type="audio" src="">
+</audio>
 </div>

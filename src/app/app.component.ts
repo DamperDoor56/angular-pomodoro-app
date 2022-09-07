@@ -1,44 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations:[
-    trigger('pageNumber',
-    [
-      state('one',style({
-        transform: 'translateX(0%)',
-    })),
-    state('two', style({
-      transform: 'translateX(-33.3%)',
-    })),
-    state('three', style({
-      transform: 'translateX(-66.6%)',
-    })),
-    transition('* <=> *',[
-      animate('500ms ease')
-    ])
-  ])
-
-  ]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'angular-pomodoro-app';
-  pageNumber = 'one'
-  workDuration = 25
-  breakDuration = 5
-  minutes = this.workDuration - 1
-  seconds = 60
-  message = ['You can do it!', 'Go to work!', 'Almost break time!']
-  interval : any = 0;
+  public workDuration = 25
+  public minutes = 5
+  public breakDuration = 5
+  public seconds = 0
+  private app = type;
+
+  private date = new Date()
+  show: boolean = true
+  disabled: boolean = false
+  animate: boolean = false
+  @ViewChild("idAudio") idAudio: ElementRef;
 
 
-  toggle(pageNumber: string){
-    this.pageNumber = pageNumber;
-  }
 
+  //Increasing time in settings
   increase_focusTime(){
     this.workDuration += 1
   }
@@ -52,4 +36,68 @@ export class AppComponent {
     this.breakDuration -= 1
   }
 
+  //Settings show
+  isDisplay = false;
+  toggleDisplay(){
+    this.isDisplay = !this.isDisplay
+  }
+
+  constructor() { }
+
+  ngOnInit(): void {
+  }
+
+  updateTimer() {
+    this.date.setMinutes(this.workDuration);
+    this.date.setSeconds(this.seconds);
+    this.date.setMilliseconds(0);
+    const time = this.date.getTime();
+    this.date.setTime(time - 1000);  //---
+
+    this.minutes = this.date.getMinutes();
+    this.seconds = this.date.getSeconds();
+
+    if (this.date.getHours() === 0 &&
+      this.date.getMinutes() === 0 &&
+      this.date.getSeconds() === 0) {
+      //stop interval
+      clearInterval(this.app);
+      this.idAudio.nativeElement.play();
+      this.animate = true;
+      setTimeout(() => {
+        this.stop();
+        this.idAudio.nativeElement.load();
+      }, 5000);
+
+    }
+  }
+
+  start() {
+    if ( this.workDuration > 0 || this.seconds > 0) {
+
+      this.disabled = true;
+      this.show = false;  //hide btn + and -
+      this.updateTimer();
+
+      if(this.seconds > 0){
+        this.app = setInterval(() => {
+          this.updateTimer();
+        }, 1000);
+      }
+    }
+  }
+
+  stop() {
+    this.disabled = false;
+    this.show = true;
+    this.animate = false;
+    clearInterval(this.app);
+    this.idAudio.nativeElement.load();
+  }
+
+  reset() {
+    this.workDuration = 0;
+    this.seconds = 0;
+    this.stop();
+  }
 }

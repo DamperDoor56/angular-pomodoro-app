@@ -11,10 +11,27 @@
     margin: 5% 0;
     text-align: center;
     border-radius: 30px;
-    border: 3px solid #8093f1;
     width: 400px;
     height: 500px;
     background-color: #9bf6ff;
+
+    .move{
+      animation: move_timer 1.3s infinite;
+    }
+
+    @keyframes move_timer {
+      20%,
+      50%,
+      80%{
+        transform: translateY(0px) ;
+      }
+      30%{
+        transform: translateY(-45px);
+      }
+      60%{
+        transform: translateY(-25px);
+      }
+    }
 
     h1{
       padding: 2rem;
@@ -60,11 +77,11 @@
     }
   }
   .settings-card{
+    position: absolute;
     margin-top: 5%;
     text-align: center;
     border-radius: 30px;
-    border: 3px solid #8093f1;
-    width: 600px;
+    width: 500px;
     height: 500px;
     background-color: #9bf6ff;
   }
