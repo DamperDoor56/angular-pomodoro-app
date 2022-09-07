@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { trigger, state, style, animate, transition } from '@angular/animations'
 
 @Component({
   selector: 'app-root',
@@ -9,18 +8,16 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 export class AppComponent implements OnInit {
   title = 'angular-pomodoro-app';
   public workDuration = 25
-  public minutes = 5
   public breakDuration = 5
-  public seconds = 0
-  private app = type;
+  public seconds = 0o0
+  private app: any;
+
 
   private date = new Date()
   show: boolean = true
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-
-
 
   //Increasing time in settings
   increase_focusTime(){
@@ -37,7 +34,7 @@ export class AppComponent implements OnInit {
   }
 
   //Settings show
-  isDisplay = false;
+  isDisplay = true;
   toggleDisplay(){
     this.isDisplay = !this.isDisplay
   }
@@ -54,7 +51,7 @@ export class AppComponent implements OnInit {
     const time = this.date.getTime();
     this.date.setTime(time - 1000);  //---
 
-    this.minutes = this.date.getMinutes();
+    this.workDuration = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
 
     if (this.date.getHours() === 0 &&
@@ -96,7 +93,7 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
-    this.workDuration = 0;
+    this.workDuration = this.workDuration;
     this.seconds = 0;
     this.stop();
   }
