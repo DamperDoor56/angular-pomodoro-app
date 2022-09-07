@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ClockComponent } from './clock/clock.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
@@ -12,7 +11,6 @@ import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     AppComponent,
-    ClockComponent
   ],
   imports: [
     BrowserModule,

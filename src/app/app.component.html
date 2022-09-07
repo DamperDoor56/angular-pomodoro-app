@@ -1,18 +1,53 @@
 <div class="app">
+  <section class="position" [@pageNumber] = "pageNumber">
   <div class="card">
     <h1>Study</h1>
-
     <div class="counter">
-        <div class="number">25</div>
+        <div class="number">{{workDuration}}</div>
     </div>
 
     <div class="buttons">
       <button><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
       <button><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
       <button><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
-      <button><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
+      <button (click)="toggle('three')"
+      ><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
       </button>
     </div>
   </div>
 
+  <div class="card break">
+    <h1>Break</h1>
+
+    <div class="counter">
+        <div class="number">{{breakDuration}}</div>
+    </div>
+
+    <div class="buttons">
+      <button><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
+      <button><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
+      <button><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
+      <button (click)="toggle('three')"
+      ><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="settings-card">
+    <div class="counter">
+      <h1>Work Duration</h1>
+      <button (click)="increase_focusTime()">+</button>
+      <div class="number">{{workDuration}}</div>
+      <button (click)="decrease_focusTime()">-</button>
+
+  </div>
+  <div class="counter">
+    <h1>Break Duration</h1>
+    <button (click)="increase_breakTime()">+</button>
+    <div class="number">{{breakDuration}}</div>
+    <button (click)="decrease_breakTime()">-</button>
+
+</div>
+  </div>
+</section>
 </div>
