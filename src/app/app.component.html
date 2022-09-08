@@ -1,8 +1,10 @@
 <div class="app" [class.move] = 'animate'>
   <div class="card">
-    <h1>Study</h1>
+    <h1 [hidden]="isStudy">Study</h1>
+    <h1 [hidden]="isBreak">Break</h1>
     <div class="counter">
-        <div class="number">{{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}</div>
+        <div class="number" [hidden]="isStudy">{{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}</div>
+        <div class="number" [hidden]="isBreak" >{{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}</div>
     </div>
 
     <div class="buttons">

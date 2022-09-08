@@ -7,13 +7,16 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'angular-pomodoro-app';
-  public workDuration = 25
-  public breakDuration = 5
+  public workDuration = 1;
+  public staticWorkMinValue = 1;
+  public breakDuration = 1
+  public staticBreakMinValue = 1;
   public seconds = 0
-  public breakseconds =0
+  public breakseconds = 0
   private app: any;
+  private timer : any;
 
-
+  private breakdate = new Date()
   private date = new Date()
   show: boolean = true
   disabled: boolean = false
@@ -23,21 +26,33 @@ export class AppComponent implements OnInit {
   //Increasing time in settings
   increase_focusTime(){
     this.workDuration += 1
+    this.staticWorkMinValue += 1
   }
   decrease_focusTime(){
     this.workDuration -= 1
+    this.staticWorkMinValue -= 1
   }
   increase_breakTime(){
     this.breakDuration += 1
+    this.staticBreakMinValue +=1
   }
   decrease_breakTime(){
     this.breakDuration -= 1
+    this.staticBreakMinValue -=1
   }
+
 
   //Settings show
   isDisplay = true;
   toggleDisplay(){
     this.isDisplay = !this.isDisplay
+  }
+  //Break time show
+  isStudy = false
+  isBreak = true;
+  toggleBreak(){
+    this.isBreak = !this.isBreak
+    this.isStudy = !this.isStudy
   }
 
   constructor() { }
@@ -62,35 +77,35 @@ export class AppComponent implements OnInit {
       this.idAudio.nativeElement.play();
       this.animate = true;
       setTimeout(() => {
-        this.stop();
         this.idAudio.nativeElement.load();
-      }, 5000);
+      }, (this.breakDuration * 10000), this.toggleBreak(), this.startBreak(), );
     }
+
   }
   //break timer
   updateBreakTimer() {
-    if(this.breakDuration > 0 && this.breakseconds > 0){
-      this.date.setMinutes(this.breakDuration);
-      this.date.setSeconds(this.breakseconds);
-      const time = this.date.getTime();
-      this.date.setTime(time - 1000);  //---
+      this.breakdate.setMinutes(this.breakDuration);
+      this.breakdate.setSeconds(this.breakseconds);
+      const breaktime = this.breakdate.getTime();
+      this.breakdate.setTime(breaktime - 1000);  //---
 
-      this.breakDuration = this.date.getMinutes();
-      this.breakseconds = this.date.getSeconds();
+      this.breakDuration = this.breakdate.getMinutes();
+      this.breakseconds = this.breakdate.getSeconds();
 
-      if (this.date.getMinutes() === 0 &&
-        this.date.getSeconds() === 0) {
+      if (this.breakdate.getMinutes() === 0 &&
+        this.breakdate.getSeconds() === 0) {
         //stop interval
-        clearInterval(this.app);
+        clearInterval(this.timer);
         this.idAudio.nativeElement.play();
         this.animate = true;
+
         setTimeout(() => {
-          this.stop();
           this.idAudio.nativeElement.load();
-        }, 5000);
+        },
+          (this.workDuration = this.staticWorkMinValue,this.workDuration * 10000),this.toggleBreak(), this.start());
 
       }
-    }
+
 
   }
   //Start study cycle button
@@ -98,7 +113,7 @@ export class AppComponent implements OnInit {
     if ( this.workDuration > 0 || this.seconds > 0) {
 
       this.disabled = true;
-      this.show = false;  //hide btn + and -
+      this.show = false;  //hide btn
       this.updateTimer();
 
       if(this.seconds > 0){
@@ -108,7 +123,19 @@ export class AppComponent implements OnInit {
       }
     }
   }
+// start break cycle
+startBreak() {
+  if ( this.breakDuration > 0 || this.breakseconds > 0) {
+    this.disabled = true;
+    this.updateBreakTimer();
 
+    if(this.breakseconds > 0){
+      this.app = setInterval(() => {
+        this.updateBreakTimer();
+      }, 1000);
+    }
+  }
+}
   stop() {
     this.disabled = false;
     this.show = true;
@@ -118,7 +145,7 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
-    this.workDuration = 25;
+    this.workDuration = this.staticWorkMinValue;
     this.seconds = 0;
     this.stop();
   }
