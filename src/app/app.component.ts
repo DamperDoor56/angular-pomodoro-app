@@ -9,7 +9,7 @@ export class AppComponent implements OnInit {
   title = 'angular-pomodoro-app';
   public workDuration = 25
   public breakDuration = 5
-  public seconds = 0o0
+  public seconds = 0
   private app: any;
 
 
@@ -44,18 +44,17 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);
     this.date.setSeconds(this.seconds);
-    this.date.setMilliseconds(0);
     const time = this.date.getTime();
     this.date.setTime(time - 1000);  //---
 
     this.workDuration = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
 
-    if (this.date.getHours() === 0 &&
-      this.date.getMinutes() === 0 &&
+    if (this.date.getMinutes() === 0 &&
       this.date.getSeconds() === 0) {
       //stop interval
       clearInterval(this.app);
@@ -69,6 +68,8 @@ export class AppComponent implements OnInit {
     }
   }
 
+
+  //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
 
@@ -83,6 +84,8 @@ export class AppComponent implements OnInit {
       }
     }
   }
+  //Start break cycle
+
 
   stop() {
     this.disabled = false;
@@ -93,7 +96,7 @@ export class AppComponent implements OnInit {
   }
 
   reset() {
-    this.workDuration = this.workDuration;
+    this.workDuration = 25;
     this.seconds = 0;
     this.stop();
   }

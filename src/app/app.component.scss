@@ -2,11 +2,6 @@
   display: flex;
   justify-content: center;
 
-  .position{
-    display: flex;
-    height: 100%;
-    justify-content: space-between;
-
   .card{
     margin: 5% 0;
     text-align: center;
@@ -40,19 +35,18 @@
       font-size: 40px;
       display: flex;
       justify-content: center;
+      text-align: center;
       width: 100%;
 
       .number{
-        padding: 7rem;
+        padding: 2rem 5rem 2rem 5rem;
         border-radius: 50%;
-        width: 40px;
-        border: 5px solid #b8b8ff;
       }
     }
     .buttons{
       display: flex;
       position: relative;
-      top: 65px;
+      top: 234px;
       justify-content: space-around;
 
       button{
@@ -85,6 +79,10 @@
     height: 500px;
     background-color: #9bf6ff;
   }
+
+  .done{
+    display:none;
   }
+
 
 

@@ -1,14 +1,13 @@
 <div class="app" [class.move] = 'animate'>
-  <section class="position">
   <div class="card">
     <h1>Study</h1>
     <div class="counter">
-        <div class="number">{{workDuration}}:{{seconds}}</div>
+        <div class="number">{{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}</div>
     </div>
 
     <div class="buttons">
-      <button (click)="start()"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
-      <button (click)="stop()"><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
+      <button (click)="start()" [disabled]="disabled"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
+      <button (click)="stop()" ><mat-icon aria-hidden="false" aria-label="Example pause icon" fontIcon="pause"></mat-icon></button>
       <button (click)="reset()"><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
       <button (click)="toggleDisplay()"
       ><mat-icon aria-hidden="false" aria-label="Example settings icon" fontIcon="settings"></mat-icon>
@@ -34,7 +33,6 @@
 
 </div>
   </div>
-</section>
 
 <audio #idAudio controls class="done">
   <source type="audio" src="">
