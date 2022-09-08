@@ -10,6 +10,7 @@ export class AppComponent implements OnInit {
   public workDuration = 25
   public breakDuration = 5
   public seconds = 0
+  public breakseconds =0
   private app: any;
 
 
@@ -64,11 +65,34 @@ export class AppComponent implements OnInit {
         this.stop();
         this.idAudio.nativeElement.load();
       }, 5000);
-
     }
   }
+  //break timer
+  updateBreakTimer() {
+    if(this.breakDuration > 0 && this.breakseconds > 0){
+      this.date.setMinutes(this.breakDuration);
+      this.date.setSeconds(this.breakseconds);
+      const time = this.date.getTime();
+      this.date.setTime(time - 1000);  //---
 
+      this.breakDuration = this.date.getMinutes();
+      this.breakseconds = this.date.getSeconds();
 
+      if (this.date.getMinutes() === 0 &&
+        this.date.getSeconds() === 0) {
+        //stop interval
+        clearInterval(this.app);
+        this.idAudio.nativeElement.play();
+        this.animate = true;
+        setTimeout(() => {
+          this.stop();
+          this.idAudio.nativeElement.load();
+        }, 5000);
+
+      }
+    }
+
+  }
   //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
@@ -84,8 +108,6 @@ export class AppComponent implements OnInit {
       }
     }
   }
-  //Start break cycle
-
 
   stop() {
     this.disabled = false;

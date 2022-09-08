@@ -10,6 +10,13 @@
     height: 500px;
     background-color: #9bf6ff;
 
+    h1{
+      font-size: 40px;
+      border-top-left-radius: 30px;
+      border-top-right-radius: 30px;
+      border-bottom: 5px solid seagreen;
+    }
+
     .move{
       animation: move_timer 1.3s infinite;
     }
@@ -80,9 +87,7 @@
     background-color: #9bf6ff;
   }
 
-  .done{
-    display:none;
-  }
-
-
+.done{
+  display: none;
+}
 
