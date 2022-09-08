@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
       this.animate = true;
       setTimeout(() => {
         this.idAudio.nativeElement.load();
-      }, (this.breakDuration * 10000), this.toggleBreak(), this.startBreak(), );
+      }, this.breakDuration = this.staticBreakMinValue,(this.breakDuration * 10000), this.toggleBreak(), this.startBreak(), );
     }
 
   }
@@ -145,6 +145,9 @@ startBreak() {
   }
 
   reset() {
+    if(this.isBreak === false){
+      this.toggleBreak()
+    }
     this.workDuration = this.staticWorkMinValue;
     this.seconds = 0;
     this.stop();
