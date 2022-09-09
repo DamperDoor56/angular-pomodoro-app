@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   public staticBreakMinValue = 1;
   public seconds = 0
   public breakseconds = 0
+  public circule = <SVGCircleElement>document.querySelector('circle');
   private app: any;
   private timer : any;
 
@@ -62,13 +63,15 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  pepe (){
+    parseInt(this.circule.style.strokeDashoffset) - 100;
+  }
   //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);
     this.date.setSeconds(this.seconds);
     const time = this.date.getTime();
     this.date.setTime(time - 1000);  //---
-
     this.workDuration = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
 
@@ -89,8 +92,9 @@ export class AppComponent implements OnInit {
       this.breakdate.setMinutes(this.breakDuration);
       this.breakdate.setSeconds(this.breakseconds);
       const breaktime = this.breakdate.getTime();
-      this.breakdate.setTime(breaktime - 1000);  //---
-
+      this.breakdate.setTime(breaktime - 1000);  
+      
+      
       this.breakDuration = this.breakdate.getMinutes();
       this.breakseconds = this.breakdate.getSeconds();
 
@@ -110,6 +114,7 @@ export class AppComponent implements OnInit {
 
 
   }
+ 
   //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
