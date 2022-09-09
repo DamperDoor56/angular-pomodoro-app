@@ -23,6 +23,10 @@ export class AppComponent implements OnInit {
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
 
+  //visual timer
+  public numbersito = document.getElementById("number");
+  public counter = this.workDuration;
+  
   //Increasing time in settings
   increase_focusTime(){
     this.workDuration += 1

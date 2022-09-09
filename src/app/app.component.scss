@@ -46,14 +46,35 @@
       width: 100%;
 
       .number{
-        padding: 2rem 5rem 2rem 5rem;
-        border-radius: 50%;
+        .outer{
+          height: 120px;
+          width: 120px;
+          padding:20px;
+          border-radius: 50%;
+          box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
+          -6px -6px 10px -1px rgba(255,255,0255,0.7);
+        }
+        .inner{
+          height: 80px;
+          width: 80px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding:20px;
+          border-radius: 50%;
+          box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
+          inset -4px 4px 6px -1px rgba(255,255,255,0.7),
+          -0.5px -0.5px 0px rgba(255, 255, 255, 1),
+          0.5px 0.5px 0px rgba(255, 255, 255, 0.15),
+          0px 12px 10px -10px rgba(0,0,0,0.05);
+        }
+
       }
     }
     .buttons{
       display: flex;
       position: relative;
-      top: 234px;
+      top: 0;
       justify-content: space-around;
 
       button{
@@ -90,4 +111,24 @@
 .done{
   display: none;
 }
+circle {
+  font-size: 60px;
+  fill: none;
+  stroke: cornflowerblue;
+  stroke-width: 20px;
+  stroke-dasharray: 472;
+  stroke-dashoffset: 472;
+  animation: anim 2s linear forwards;
+}
+svg{
+  position: relative;
+  bottom: 160px;
+  left: 0;
+}
 
+@keyframes anim {
+  100%{
+    stroke-dashoffset: 950;
+  }
+
+}

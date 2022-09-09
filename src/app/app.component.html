@@ -3,9 +3,35 @@
     <h1 [hidden]="isStudy">Study</h1>
     <h1 [hidden]="isBreak">Break</h1>
     <div class="counter">
-        <div class="number" [hidden]="isStudy">{{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}</div>
-        <div class="number" [hidden]="isBreak" >{{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}</div>
+        <div class="number" [hidden]="isStudy">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+                {{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="number" [hidden]="isBreak">
+          <div class="outer">
+            <div class="inner">
+              <div id="number">
+                {{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="160px" height="160px">
+      <defs>
+         <linearGradient id="GradientColor">
+            <stop offset="0%" stop-color="#e91e63" />
+            <stop offset="100%" stop-color="#673ab7" />
+         </linearGradient>
+      </defs>
+      <circle cx="80" cy="80" r="70" stroke-linecap="round" />
+</svg>
 
     <div class="buttons">
       <button (click)="start()" [disabled]="disabled"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
@@ -19,7 +45,7 @@
 
 
   <div class="settings-card" [hidden]="isDisplay">
-    <h1>Settings</h1>  <button (click)="toggleDisplay()"><mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon></button>
+    <h1>Settings</h1> <button (click)="toggleDisplay()"><mat-icon aria-hidden="false" aria-label="Example close icon" fontIcon="close"></mat-icon></button>
     <div class="counter">
       <h1>Work Duration</h1>
       <button (click)="increase_focusTime()">+</button>
