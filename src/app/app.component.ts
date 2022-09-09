@@ -63,9 +63,7 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  pepe (){
-    parseInt(this.circule.style.strokeDashoffset) - 100;
-  }
+
   //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);
@@ -89,6 +87,7 @@ export class AppComponent implements OnInit {
   }
   //break timer
   updateBreakTimer() {
+    parseFloat(this.circule.style.strokeDashoffset) === this.workDuration;
       this.breakdate.setMinutes(this.breakDuration);
       this.breakdate.setSeconds(this.breakseconds);
       const breaktime = this.breakdate.getTime();
