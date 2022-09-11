@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked, ContentChild, TemplateRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,10 @@ export class AppComponent implements OnInit {
   public staticBreakMinValue = 1;
   public seconds = 0
   public breakseconds = 0
-  public circule = <SVGCircleElement>document.querySelector('circle');
   private app: any;
   private timer : any;
+
+
 
   private breakdate = new Date()
   private date = new Date()
@@ -23,8 +24,7 @@ export class AppComponent implements OnInit {
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-
-  //visual timer
+  @ContentChild('outer') outer: ElementRef
 
   //Increasing time in settings
   increase_focusTime(){
@@ -64,6 +64,24 @@ export class AppComponent implements OnInit {
   }
 
 
+  //Progress bar
+  animatedCircle(){
+    let startValue = 1;
+    let endValue = Math.floor(this.staticWorkMinValue * 60);
+
+    let progress = setInterval(() =>{
+      startValue += 1;
+
+      console.log(this.outer)
+      // = `conic-gradient(#506bf1 ${startValue * 3.6}deg, #eee 0deg);`
+      console.log(startValue)
+      // console.log(endValue)
+      if(startValue === endValue){
+        clearInterval(progress);
+      }
+    }, 1000)
+  }
+
   //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);
@@ -72,6 +90,7 @@ export class AppComponent implements OnInit {
     this.date.setTime(time - 1000);  //---
     this.workDuration = this.date.getMinutes();
     this.seconds = this.date.getSeconds();
+
 
     if (this.date.getMinutes() === 0 &&
       this.date.getSeconds() === 0) {
@@ -87,13 +106,12 @@ export class AppComponent implements OnInit {
   }
   //break timer
   updateBreakTimer() {
-    parseFloat(this.circule.style.strokeDashoffset) === this.workDuration;
       this.breakdate.setMinutes(this.breakDuration);
       this.breakdate.setSeconds(this.breakseconds);
       const breaktime = this.breakdate.getTime();
-      this.breakdate.setTime(breaktime - 1000);  
-      
-      
+      this.breakdate.setTime(breaktime - 1000);
+
+
       this.breakDuration = this.breakdate.getMinutes();
       this.breakseconds = this.breakdate.getSeconds();
 
@@ -113,7 +131,7 @@ export class AppComponent implements OnInit {
 
 
   }
- 
+
   //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
@@ -121,10 +139,14 @@ export class AppComponent implements OnInit {
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
+      this.animatedCircle();
+
 
       if(this.seconds > 0){
         this.app = setInterval(() => {
           this.updateTimer();
+
+
         }, 1000);
       }
     }
@@ -138,6 +160,7 @@ startBreak() {
     if(this.breakseconds > 0){
       this.app = setInterval(() => {
         this.updateBreakTimer();
+
       }, 1000);
     }
   }
