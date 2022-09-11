@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-  @ContentChild('outer') outer: ElementRef
+  @ViewChild('outer') outer: ElementRef;
 
   //Increasing time in settings
   increase_focusTime(){
