@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked, ContentChild, TemplateRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Renderer2 ,AfterViewChecked, ContentChild, TemplateRef, ViewChildren, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-  @ViewChild("idouter") idouter: ElementRef;
+  @ViewChild("idOuter") idOuter: ElementRef;
 
   //Increasing time in settings
   increase_focusTime(){
@@ -63,14 +63,13 @@ export class AppComponent implements OnInit {
     this.isStudy = !this.isStudy
   }
 
-  constructor() { }
+  constructor(
+    private renderer: Renderer2
+  ) { }
 
-
-  ngOnInit(): void {
+  ngAfterViewInit() {
+  
   }
-
-
-  //Progress bar
   animatedCircle(){
     let startValue = 1;
     let endValue = Math.floor(this.staticWorkMinValue * 60);
@@ -78,15 +77,20 @@ export class AppComponent implements OnInit {
     let progress = setInterval(() => {
       startValue += 1;
       console.log(startValue)
-      // console.log(this.idouter)
-      console.log(this.idouter)
-      // this.idouter.nativeElement.ownerDocument.body.style.setProperty("background", `conic-gradient(#506bf1 calc(${startValue} * 3.6deg) , #eee 0deg)`, "important");
+      this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * 3}deg , #eee 0deg)`;
       if(startValue === endValue){
         clearInterval(progress);
       }
     }, 1000)
   }
 
+
+  ngOnInit(): void {
+  }
+
+
+  //Progress bar
+  
   //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);

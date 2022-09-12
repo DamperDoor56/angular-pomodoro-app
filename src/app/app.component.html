@@ -4,7 +4,7 @@
     <h1 [hidden]="isBreak">Break</h1>
     <div class="counter">
         <div class="number" [hidden]="isStudy">
-          <div class="outer">
+          <div #idOuter class="outer">
             <div class="inner">
               <div id="number">
                 {{workDuration | number:'2.0'}}:{{seconds | number:'2.0'}}
@@ -13,7 +13,7 @@
           </div>
         </div>
         <div class="number" [hidden]="isBreak">
-          <div #idouter class="outer">
+          <div class="outer">
             <div class="inner">
               <div id="number">
                 {{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}
