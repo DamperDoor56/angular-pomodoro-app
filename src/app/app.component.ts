@@ -1,7 +1,12 @@
-import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked, ContentChild, TemplateRef } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewChecked, ContentChild, TemplateRef, ViewChildren, QueryList } from '@angular/core';
 
 @Component({
   selector: 'app-root',
+  template:`
+   <div class="inner">
+              <div id="number">
+                {{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}
+              </div>`,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
@@ -24,7 +29,7 @@ export class AppComponent implements OnInit {
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-  @ViewChild('outer') outer: ElementRef;
+  @ViewChildren('.outer') outer: any;
 
   //Increasing time in settings
   increase_focusTime(){
@@ -60,6 +65,7 @@ export class AppComponent implements OnInit {
 
   constructor() { }
 
+
   ngOnInit(): void {
   }
 
@@ -71,9 +77,7 @@ export class AppComponent implements OnInit {
 
     let progress = setInterval(() =>{
       startValue += 1;
-
-      console.log(this.outer)
-      // = `conic-gradient(#506bf1 ${startValue * 3.6}deg, #eee 0deg);`
+      // this.outer.style.background= `conic-gradient(#506bf1 ${startValue * 3.6}deg, #eee 0deg);`
       console.log(startValue)
       // console.log(endValue)
       if(startValue === endValue){
@@ -139,7 +143,8 @@ export class AppComponent implements OnInit {
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
-      this.animatedCircle();
+      // this.animatedCircle();
+      console.log(this.outer)
 
 
       if(this.seconds > 0){
@@ -182,3 +187,10 @@ startBreak() {
     this.stop();
   }
 }
+
+interface AfterViewInit{
+  ngAfterViewInit(): void
+
+
+}
+

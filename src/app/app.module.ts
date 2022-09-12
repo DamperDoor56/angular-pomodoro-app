@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { MatSliderModule } from '@angular/material/slider';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatIconModule} from '@angular/material/icon';
+import { OuterComponent } from './app/outer/outer.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    OuterComponent,
   ],
   imports: [
     BrowserModule,
