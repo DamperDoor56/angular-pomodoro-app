@@ -75,11 +75,12 @@ export class AppComponent implements OnInit {
     let startValue = 1;
     let endValue = Math.floor(this.staticWorkMinValue * 60);
 
-    let progress = setInterval(() =>{
+    let progress = setInterval(() => {
       startValue += 1;
       console.log(startValue)
-
-
+      // console.log(this.idouter)
+      console.log(this.idouter)
+      // this.idouter.nativeElement.ownerDocument.body.style.setProperty("background", `conic-gradient(#506bf1 calc(${startValue} * 3.6deg) , #eee 0deg)`, "important");
       if(startValue === endValue){
         clearInterval(progress);
       }
@@ -139,10 +140,11 @@ export class AppComponent implements OnInit {
   //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
-      this.animatedCircle();
+
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
+      this.animatedCircle();
 
 
       if(this.seconds > 0){
