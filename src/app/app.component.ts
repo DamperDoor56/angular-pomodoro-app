@@ -77,10 +77,10 @@ export class AppComponent implements OnInit {
     let progress = setInterval(() => {
       startValue += 1;
       console.log(startValue)
-      this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * 3}deg , #eee 0deg)`;
+      this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
       if(startValue === endValue){
         clearInterval(progress);
-      }
+      } 
     }, 1000)
   }
 
@@ -89,7 +89,6 @@ export class AppComponent implements OnInit {
   }
 
 
-  //Progress bar
   
   //Updating timer when finish time
   updateTimer() {
