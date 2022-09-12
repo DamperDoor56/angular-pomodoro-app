@@ -70,28 +70,23 @@ export class AppComponent implements OnInit {
   ngAfterViewInit() {
   
   }
+  // Back circle animated
   animatedCircle(){
     let startValue = 1;
     let endValue = Math.floor(this.staticWorkMinValue * 60);
 
     let progress = setInterval(() => {
-     if(this.workDuration != this.staticWorkMinValue &&  this.seconds != 0 && this.disabled === true){
+     if(this.workDuration >= 0 && this.seconds > 0 &&
+      this.disabled === true && this.show === false) {
       startValue += 1;
-      this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
      }else if(startValue === endValue){
         clearInterval(progress);
       }
       else if (this.workDuration === this.staticWorkMinValue &&
         this.seconds === 0){ //Reset 
           startValue = 1;
-          startValue += 0;
-          this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
-      } else if(this.disabled === false &&
-        this.show === true &&
-        this.animate === false && this.workDuration != this.staticWorkMinValue &&  this.seconds != 0){
-          startValue += 0;
-          this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
-        }
+        } 
+        this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
     }, 1000)
   }
 
