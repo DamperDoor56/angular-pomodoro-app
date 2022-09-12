@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
-  @ViewChildren('.outer') outer: any;
+  @ViewChild("idouter") idouter: ElementRef;
 
   //Increasing time in settings
   increase_focusTime(){
@@ -77,9 +77,9 @@ export class AppComponent implements OnInit {
 
     let progress = setInterval(() =>{
       startValue += 1;
-      // this.outer.style.background= `conic-gradient(#506bf1 ${startValue * 3.6}deg, #eee 0deg);`
       console.log(startValue)
-      // console.log(endValue)
+
+
       if(startValue === endValue){
         clearInterval(progress);
       }
@@ -139,12 +139,10 @@ export class AppComponent implements OnInit {
   //Start study cycle button
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
-
+      this.animatedCircle();
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
-      // this.animatedCircle();
-      console.log(this.outer)
 
 
       if(this.seconds > 0){
