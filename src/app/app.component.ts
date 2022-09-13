@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
   @ViewChild("idOuter") idOuter: ElementRef;
+  @ViewChild("idstart") idstart: ElementRef
 
   //Increasing time in settings
   increase_focusTime(){
@@ -71,6 +72,12 @@ export class AppComponent implements OnInit {
   
   }
   // Back circle animated
+  
+  // this.disabled = false;
+  //   this.show = true;
+  //   this.animate = false;
+  //   clearInterval(this.app);
+  //   this.idAudio.nativeElement.load();
   animatedCircle(){
     let startValue = 1;
     let endValue = Math.floor(this.staticWorkMinValue * 60);
@@ -86,7 +93,7 @@ export class AppComponent implements OnInit {
         this.seconds === 0){ //Reset 
           startValue = 1;
         } 
-        this.idOuter.nativeElement.style.background = `conic-gradient(#506bf1 ${startValue * (360/endValue)}deg , #eee 0deg)`;
+        this.idOuter.nativeElement.style.background = `conic-gradient(#264653 ${startValue * (360/endValue)}deg , #287271 0deg)`;
     }, 1000)
   }
 
@@ -150,6 +157,9 @@ export class AppComponent implements OnInit {
   start() {
     if ( this.workDuration > 0 || this.seconds > 0) {
       this.animatedCircle();
+      this.idstart.nativeElement.style.boxShadow = '2px 6px 10px 2px rgba(0, 0, 0, 0.432)'
+      this.idstart.nativeElement.style.background = '#e76f51'
+      this.idstart.nativeElement.style.color = '#snow'
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
