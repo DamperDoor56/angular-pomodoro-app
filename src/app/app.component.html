@@ -41,21 +41,36 @@
     </div>
     <div class="counter">
       <h1>Work Duration</h1>
-      <button (click)="increase_focusTime()">+</button>
-      <div class="number">{{workDuration}}</div>
       <button (click)="decrease_focusTime()">-</button>
-
+      <div class="number">{{workDuration}}</div>
+      <button (click)="increase_focusTime()">+</button>
   </div>
   <div class="counter">
     <h1>Break Duration</h1>
-    <button (click)="increase_breakTime()">+</button>
-    <div class="number">{{breakDuration}}</div>
     <button (click)="decrease_breakTime()">-</button>
-
+    <div class="number">{{breakDuration}}</div>
+    <button (click)="increase_breakTime()">+</button>
 </div>
+<!-- <div class="ringtone">
+  <h1>Choose sound</h1>
+<select>
+  <option>
+    Beyond Good And Evil Extended
+  <audio #idAudio controls (click)="changeValue1" class="done">
+  <source type="audio/wav" src="../assets/beyond_good_and_evil.mp3">
+  </audio>
+  </option>
+  <option>
+    Yoshi Island
+  <audio #idAudio2 controls class="done">
+  <source type="audio/wav" src="../assets/flower_garden.mp3">
+  </audio>
+  </option>
+</select>
+</div> -->
   </div>
 
-<audio #idAudio controls class="done">
-  <source type="audio/wav" src="../assets/beyond_good_and_evil.mp3">
-</audio>
+  <audio #idAudio controls class="done">
+    <source type="audio/wav" src="../assets/flower_garden.mp3">
+    </audio>
 </div>

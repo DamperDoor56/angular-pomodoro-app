@@ -22,16 +22,17 @@ export class AppComponent implements OnInit {
   private timer : any;
 
 
-
   private breakdate = new Date()
   private date = new Date()
   show: boolean = true
   disabled: boolean = false
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
+  @ViewChild("idAudio2") idAudio2: ElementRef;
   @ViewChild("idOuter") idOuter: ElementRef;
   @ViewChild("idOuterbreak") idOuterbreak: ElementRef;
-  @ViewChild("idstart") idstart: ElementRef
+  @ViewChild("idstart") idstart: ElementRef;
+
 
   //Increasing time in settings
   increase_focusTime(){
@@ -72,6 +73,7 @@ export class AppComponent implements OnInit {
   ngAfterViewInit() {
 
   }
+
   // Animated work Circle
   animatedCircle(){
     let startValue = 1;
@@ -110,9 +112,17 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
+  // public audioDisplay = (this.idAudio.nativeElement);
 
-
+  // //Audios
+  // changeValue1 (){
+  //   this.audioDisplay = this.idAudio.nativeElement;
+  // }
+  // changeValue2 (){
+  //   this.audioDisplay = this.idAudio2.nativeElement;
+  // }
 
   //Updating timer when finish time
   updateTimer() {
@@ -131,7 +141,7 @@ export class AppComponent implements OnInit {
       this.idAudio.nativeElement.load();
       this.animate = true;
       setTimeout(() => {
-        this.idAudio.nativeElement.play();
+        this.idAudio.nativeElement.play ();
       }, this.breakDuration = this.staticBreakMinValue,(this.breakDuration * 10000), this.toggleBreak(), this.startBreak(), );
     }
 
