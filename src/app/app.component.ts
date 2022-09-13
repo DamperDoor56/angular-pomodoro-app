@@ -30,6 +30,7 @@ export class AppComponent implements OnInit {
   animate: boolean = false
   @ViewChild("idAudio") idAudio: ElementRef;
   @ViewChild("idOuter") idOuter: ElementRef;
+  @ViewChild("idOuterbreak") idOuterbreak: ElementRef;
   @ViewChild("idstart") idstart: ElementRef
 
   //Increasing time in settings
@@ -69,31 +70,41 @@ export class AppComponent implements OnInit {
   ) { }
 
   ngAfterViewInit() {
-  
+
   }
-  // Back circle animated
-  
-  // this.disabled = false;
-  //   this.show = true;
-  //   this.animate = false;
-  //   clearInterval(this.app);
-  //   this.idAudio.nativeElement.load();
+  // Animated work Circle
   animatedCircle(){
     let startValue = 1;
     let endValue = Math.floor(this.staticWorkMinValue * 60);
 
     let progress = setInterval(() => {
      if(this.workDuration >= 0 && this.seconds > 0 &&
-      this.disabled === true && this.show === false) {
+      this.disabled === true && this.show === false) { //Start
       startValue += 1;
-     }else if(startValue === endValue){
+     }else if(startValue === endValue){ //End Interval
         clearInterval(progress);
       }
       else if (this.workDuration === this.staticWorkMinValue &&
-        this.seconds === 0){ //Reset 
+        this.seconds === 0){ //Reset
           startValue = 1;
-        } 
+        }
         this.idOuter.nativeElement.style.background = `conic-gradient(#264653 ${startValue * (360/endValue)}deg , #287271 0deg)`;
+    }, 1000)
+  }
+
+  // Break Circle
+  animatedBreakCircle(){
+    let startBreakValue = 1;
+    let endBreakValue = Math.floor(this.staticBreakMinValue * 60);
+
+    let breakprogress = setInterval(() => {
+     if(this.breakDuration >= 0 && this.breakseconds > 0 &&
+      this.disabled === true && this.show === false) {//Start
+        startBreakValue += 1;
+     }else if(startBreakValue === endBreakValue){//End Interval
+        clearInterval(breakprogress);
+      }
+        this.idOuterbreak.nativeElement.style.background = `conic-gradient(#264653 ${startBreakValue * (360/endBreakValue)}deg , #287271 0deg)`;
     }, 1000)
   }
 
@@ -102,7 +113,7 @@ export class AppComponent implements OnInit {
   }
 
 
-  
+
   //Updating timer when finish time
   updateTimer() {
     this.date.setMinutes(this.workDuration);
@@ -117,10 +128,10 @@ export class AppComponent implements OnInit {
       this.date.getSeconds() === 0) {
       //stop interval
       clearInterval(this.app);
-      this.idAudio.nativeElement.play();
+      this.idAudio.nativeElement.load();
       this.animate = true;
       setTimeout(() => {
-        this.idAudio.nativeElement.load();
+        this.idAudio.nativeElement.play();
       }, this.breakDuration = this.staticBreakMinValue,(this.breakDuration * 10000), this.toggleBreak(), this.startBreak(), );
     }
 
@@ -160,17 +171,16 @@ export class AppComponent implements OnInit {
       this.idstart.nativeElement.style.boxShadow = '2px 6px 10px 2px rgba(0, 0, 0, 0.432)'
       this.idstart.nativeElement.style.background = '#e76f51'
       this.idstart.nativeElement.style.color = '#snow'
+      this.idstart.nativeElement.style.border = ' 2px solid #e76f51'
       this.disabled = true;
       this.show = false;  //hide btn
       this.updateTimer();
-      
+
 
 
       if(this.seconds > 0){
         this.app = setInterval(() => {
           this.updateTimer();
-
-
         }, 1000);
       }
     }
@@ -178,6 +188,7 @@ export class AppComponent implements OnInit {
 // start break cycle
 startBreak() {
   if ( this.breakDuration > 0 || this.breakseconds > 0) {
+    this.animatedBreakCircle();
     this.disabled = true;
     this.updateBreakTimer();
 
@@ -194,7 +205,6 @@ startBreak() {
     this.show = true;
     this.animate = false;
     clearInterval(this.app);
-    this.idAudio.nativeElement.load();
   }
 
   reset() {
