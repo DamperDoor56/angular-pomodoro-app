@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "public": "public",
+    "public": "dis/angular-pomodoro-app",
     "ignore": [
       "firebase.json",
       "**/.*",

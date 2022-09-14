@@ -1,15 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, Renderer2 ,AfterViewChecked, ContentChild, TemplateRef, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Renderer2 ,AfterViewChecked, ContentChild, TemplateRef, ViewChildren, QueryList } from "@angular/core";
 
 @Component({
   selector: 'app-root',
-  template:`
-   <div class="inner">
-              <div id="number">
-                {{breakDuration | number:'2.0'}}:{{breakseconds | number:'2.0'}}
-              </div>`,
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
+
 export class AppComponent implements OnInit {
   title = 'angular-pomodoro-app';
   public workDuration = 1;
