@@ -72,16 +72,23 @@ export class AppComponent implements OnInit {
 
   // Animated work Circle
   animatedCircle(){
-    let startValue = 1;
+    let startValue = 0;
+    if(this.workDuration === this.staticWorkMinValue && this.seconds === 0){
+      startValue = 1;
+    }
+
     let endValue = Math.floor(this.staticWorkMinValue * 60);
 
     let progress = setInterval(() => {
      if(this.workDuration >= 0 && this.seconds > 0 &&
       this.disabled === true && this.show === false) { //Start
       startValue += 1;
+      console.log(startValue)
      }else if(startValue === endValue){ //End Interval
-        clearInterval(progress);
-      }
+        clearInterval(progress); }
+        //  else if (){ // Pause
+      //     startValue === 20;
+      //   }
       else if (this.workDuration === this.staticWorkMinValue &&
         this.seconds === 0){ //Reset
           startValue = 1;

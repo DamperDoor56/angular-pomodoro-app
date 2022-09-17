@@ -23,13 +23,3 @@ body{
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
-.outer{
-  background: conic-gradient(#264653 6deg , #287271 0deg);
-  height: 160px;
-  width: 160px;
-  padding:20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-}

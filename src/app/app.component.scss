@@ -55,6 +55,18 @@
 
       .number{
 
+        .outer{
+         background: conic-gradient(#264653 0.2deg , #287271 0deg);
+         height: 160px;
+         width: 160px;
+         padding:20px;
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         border-radius: 50%;
+}
+
+
         .inner{
           background-color: #2a9d8f;
           height: 120px;
