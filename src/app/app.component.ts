@@ -72,48 +72,51 @@ export class AppComponent implements OnInit {
 
   // Animated work Circle
   animatedCircle(){
-    let startValue = 0;
+    let endValue = Math.floor(this.staticWorkMinValue * 60);
     if(this.workDuration === this.staticWorkMinValue && this.seconds === 0){
-      startValue = 1;
+      let startValue = 1;
+      let progress = setInterval(() => {
+        if(this.workDuration >= 0 && this.seconds > 0 &&
+         this.disabled === true && this.show === false) { //Start
+         startValue += 1;
+         console.log(startValue)
+        }else if(startValue === endValue){ //End Interval
+           clearInterval(progress); }
+           else if (this.workDuration === this.staticWorkMinValue &&
+            this.seconds === 0){ //Reset
+              startValue = 1;
+            }
+            this.idOuter.nativeElement.style.background = `conic-gradient(#264653 ${startValue * (360/endValue)}deg , #287271 0deg)`;
+        }, 1000)
+      }
+
     }
 
-    let endValue = Math.floor(this.staticWorkMinValue * 60);
 
-    let progress = setInterval(() => {
-     if(this.workDuration >= 0 && this.seconds > 0 &&
-      this.disabled === true && this.show === false) { //Start
-      startValue += 1;
-      console.log(startValue)
-     }else if(startValue === endValue){ //End Interval
-        clearInterval(progress); }
-        //  else if (){ // Pause
-      //     startValue === 20;
-      //   }
-      else if (this.workDuration === this.staticWorkMinValue &&
-        this.seconds === 0){ //Reset
-          startValue = 1;
-        }
-        this.idOuter.nativeElement.style.background = `conic-gradient(#264653 ${startValue * (360/endValue)}deg , #287271 0deg)`;
-    }, 1000)
-  }
+
+
 
   // Break Circle
   animatedBreakCircle(){
-    let startBreakValue = 1;
     let endBreakValue = Math.floor(this.staticBreakMinValue * 60);
-
-    let breakprogress = setInterval(() => {
-     if(this.breakDuration >= 0 && this.breakseconds > 0 &&
-      this.disabled === true && this.show === false) {//Start
-        startBreakValue += 1;
-     }else if(startBreakValue === endBreakValue){//End Interval
-        clearInterval(breakprogress);
+    if(this.breakDuration === this.staticBreakMinValue && this.breakseconds === 0){
+      let startBreakValue = 1;
+      let breakprogress = setInterval(() => {
+        if(this.breakDuration >= 0 && this.breakseconds > 0 &&
+         this.disabled === true && this.show === false) { //Start
+          startBreakValue += 1;
+         console.log(startBreakValue)
+        }else if(startBreakValue === endBreakValue){ //End Interval
+           clearInterval(breakprogress); }
+           else if (this.breakDuration === this.staticBreakMinValue &&
+            this.breakseconds === 0){ //Reset
+              startBreakValue = 1;
+            }
+            this.idOuterbreak.nativeElement.style.background = `conic-gradient(#264653 ${startBreakValue * (360/endBreakValue)}deg , #287271 0deg)`;
+        }, 1000)
       }
-        this.idOuterbreak.nativeElement.style.background = `conic-gradient(#264653 ${startBreakValue * (360/endBreakValue)}deg , #287271 0deg)`;
-    }, 1000)
-  }
 
-
+    }
   ngOnInit(): void {
 
   }
@@ -203,6 +206,7 @@ startBreak() {
   if ( this.breakDuration > 0 || this.breakseconds > 0) {
     this.animatedBreakCircle();
     this.disabled = true;
+    this.show = false;
     this.updateBreakTimer();
 
     if(this.breakseconds > 0){

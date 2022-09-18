@@ -23,8 +23,8 @@
         </div>
     </div>
 
-
-    <button class="middle" #idstart (click)="start()" [disabled]="disabled"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
+    <button class="middle" [hidden]="isBreak" (click)="startBreak()"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
+    <button class="middle" [hidden]="isStudy" #idstart (click)="start()" [disabled]="disabled"><mat-icon aria-hidden="false" fontIcon="play_arrow"></mat-icon></button>
 
     <div class="buttons">
       <button (click)="reset()"><mat-icon aria-hidden="false" aria-label="Example restart_alt icon" fontIcon="restart_alt"></mat-icon></button>
